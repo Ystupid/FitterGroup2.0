@@ -16,31 +16,6 @@ public class Main : MonoBehaviour, IFitterable<ColorItem>
 
     public int ItemCount => m_DataList.Count;
 
-    public void DisableItem(int index, ColorItem item)
-    {
-        item.gameObject.SetActive(false);
-        m_CacheQueue.Enqueue(item);
-    }
-
-    public ColorItem EnableItem(int index)
-    {
-        var item = default(ColorItem);
-
-        if (m_CacheQueue.Count <= 0)
-        {
-            item = Instantiate(m_Prefab, m_FitterGroup.TargetRect).GetComponent<ColorItem>();
-        }
-        else
-        {
-            item = m_CacheQueue.Dequeue();
-            item.gameObject.SetActive(true);
-        }
-
-        item.Refresh(m_DataList[index]);
-
-        return item;
-    }
-
     private void Start()
     {
         m_DataList = new List<int>();
@@ -50,5 +25,37 @@ public class Main : MonoBehaviour, IFitterable<ColorItem>
         m_CacheQueue = new Queue<ColorItem>();
         m_FitterGroup = new FitterGroup<ColorItem>(this, m_FitterView);
         m_FitterGroup.Refresh();
+    }
+
+    /// <summary>
+    /// Item失活回调
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="item"></param>
+    public void DisableItem(int index, ColorItem item)
+    {
+        item.gameObject.SetActive(false);
+        m_CacheQueue.Enqueue(item);
+    }
+
+    /// <summary>
+    /// Item激活回调
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public ColorItem EnableItem(int index)
+    {
+        var item = default(ColorItem);
+
+        if (m_CacheQueue.Count > 0)
+        {
+            item = m_CacheQueue.Dequeue();
+            item.gameObject.SetActive(true);
+        }
+        else item = Instantiate(m_Prefab, m_FitterGroup.TargetRect).GetComponent<ColorItem>();
+
+        item.Refresh(m_DataList[index]);
+
+        return item;
     }
 }
