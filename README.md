@@ -1,5 +1,6 @@
 # FitterGroup2.0 Beta
 UGUI循环列表2.0测试版
+目前还没有解决缓存机制 请不要在正式环境使用
 # 循环
 ![Res_1](Res/Res_1.gif)
 # 布局
