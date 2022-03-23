@@ -9,7 +9,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
     {
         Scale = 1,
         Gradient = 2,
-        Float = 4,
-        Elasticity = 8,
+        Elasticity = 4,
+        Float = 8,
     }
 }

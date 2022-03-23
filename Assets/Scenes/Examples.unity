@@ -310,15 +310,16 @@ MonoBehaviour:
     Right: 0
     Top: 0
     Bottom: 0
-  m_CellSize: {x: 200, y: 200}
+  m_CellSize: {x: 400, y: 400}
   m_Spacing: {x: 50, y: 50}
   m_LayoutAxis: 0
   m_ConstraintCount: 1
   m_EffectGroup:
-    m_Effects: 9
+    m_Effects: 13
     m_EffectList:
     - id: 0
     - id: 1
+    - id: 2
   m_ScrollRect: {fileID: 461306238}
   references:
     version: 1
@@ -335,6 +336,11 @@ MonoBehaviour:
         m_CurrentIndex: -1
         m_SmoothMode: 1
         m_DecelerationRate: 16
+    00000002:
+      type: {class: FloatEffect, ns: UnityEngine.UI.FitterGroup.Effect, asm: Assembly-CSharp}
+      data:
+        m_FloatSpeed: 2
+        m_FloatRange: 200
 --- !u!114 &461306238
 MonoBehaviour:
   m_ObjectHideFlags: 0
