@@ -339,6 +339,7 @@ MonoBehaviour:
     00000002:
       type: {class: FloatEffect, ns: UnityEngine.UI.FitterGroup.Effect, asm: Assembly-CSharp}
       data:
+        m_DecelerationRate: 16
         m_FloatSpeed: 2
         m_FloatRange: 200
 --- !u!114 &461306238

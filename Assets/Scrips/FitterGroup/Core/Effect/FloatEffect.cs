@@ -5,11 +5,20 @@ using UnityEngine.UI.FitterGroup.Layout;
 
 namespace UnityEngine.UI.FitterGroup.Effect
 {
-    public class FloatEffect : FitterEffect,ILayoutModifier
+    public class FloatEffect : FitterEffect, ILayoutModifier
     {
         public override FitterEffectType EffectType => FitterEffectType.Float;
 
+        private int m_CurrentIndex;
+        private float m_Offset;
         private float m_Time;
+
+        [SerializeField] protected float m_DecelerationRate = 16;
+        public float DecelerationRate
+        {
+            get => m_DecelerationRate;
+            set => m_DecelerationRate = value;
+        }
 
         [SerializeField] protected float m_FloatSpeed = 2;
         public float FloatSpeed
@@ -31,28 +40,31 @@ namespace UnityEngine.UI.FitterGroup.Effect
 
             if (result.item == null) return;
 
-            var floatValue =  Mathf.Sin(m_Time += Time.deltaTime * m_FloatSpeed) * m_FloatRange * Vector2.one;
+            if (result.index != m_CurrentIndex)
+            {
+                m_Time = 0;
+                m_CurrentIndex = result.index;
+            }
+
+            var floatValue = Mathf.Sin(m_Time += Time.deltaTime * m_FloatSpeed) * m_FloatRange * Vector2.one;
 
             var anchoredPosition = result.item.RectTransform.anchoredPosition;
-            var offset = anchoredPosition.y;
 
-            anchoredPosition.y = floatValue.y - 200;
+            anchoredPosition.y = floatValue.y + m_Offset;
             result.item.RectTransform.anchoredPosition = anchoredPosition;
-        }
 
-        public override void UpdateAfter<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable)
-        {
-            //var result = CalculateIndex(keyValues, effectable);
+            var rectTransform = default(RectTransform);
+            foreach (var item in keyValues)
+            {
+                rectTransform = item.Value.RectTransform;
 
-            //var rectTransform = default(RectTransform);
+                if (rectTransform == result.item.RectTransform) continue;
 
-            //foreach (var item in keyValues)
-            //{
-            //    rectTransform = item.Value.RectTransform;
+                var targetPosition = rectTransform.anchoredPosition;
+                targetPosition.y = m_Offset;
 
-            //    if (item.Value.RectTransform == result.item.RectTransform) continue;
-
-            //}
+                rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, targetPosition, Time.deltaTime * m_DecelerationRate);
+            }
         }
 
         protected virtual (int index, IFitterItem item) CalculateIndex<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem
@@ -76,21 +88,9 @@ namespace UnityEngine.UI.FitterGroup.Effect
             return (currentIndex, currentItem);
         }
 
-        public void ModifyContentRect(ref Vector2 rectSize, ILayoutProperty layoutProperty, int itemCount)
-        {
-        }
-
-        public void ModifyItemPosition(ref Vector2 itemPosition, ILayoutProperty layoutProperty, int itemCount)
-        {
-            
-        }
-
-        public void ModifyMinIndex(ref int index, ILayoutProperty layoutProperty, int itemCount)
-        {
-        }
-
-        public void ModifyMaxIndex(ref int index, ILayoutProperty layoutProperty, int itemCount)
-        {
-        }
+        public void ModifyContentRect(ref Vector2 rectSize, ILayoutProperty layoutProperty, int itemCount) { }
+        public void ModifyItemPosition(ref Vector2 itemPosition, ILayoutProperty layoutProperty, int itemCount) => m_Offset = itemPosition.y;
+        public void ModifyMinIndex(ref int index, ILayoutProperty layoutProperty, int itemCount) { }
+        public void ModifyMaxIndex(ref int index, ILayoutProperty layoutProperty, int itemCount) { }
     }
 }
