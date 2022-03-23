@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\GradientEffect.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\IEffectable.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\ScaleEffect.cs" />
+    <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\SmoothMode.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\FitterGroup.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\FitterGroupEditor.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\FitterView.cs" />

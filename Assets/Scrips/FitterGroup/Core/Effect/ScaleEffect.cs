@@ -10,6 +10,8 @@ namespace UnityEngine.UI.FitterGroup.Effect
 
         [SerializeField] protected float m_MinSize = 0.5f;
         [SerializeField] protected Vector2 m_Spacing = Vector2.zero;
+        [SerializeField] protected SmoothMode m_SmoothMode = SmoothMode.None;
+        [SerializeField] protected float m_DecelerationRate = 16;
 
         public float MinSize
         {
@@ -23,7 +25,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
             set => m_Spacing = value;
         }
 
-        public override void UpdateAfter<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable)
+        public override void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable)
         {
             var fitterItem = default(RectTransform);
 
@@ -48,8 +50,19 @@ namespace UnityEngine.UI.FitterGroup.Effect
                 distanceRatio.x = Mathf.Clamp(distanceRatio.x, m_MinSize, 1);
                 distanceRatio.y = Mathf.Clamp(distanceRatio.y, m_MinSize, 1);
 
-                fitterItem.localScale = Vector3.one * distanceRatio.x;
+                var targetValue = Vector3.one * distanceRatio.x;
+
+                switch (m_SmoothMode)
+                {
+                    case SmoothMode.None: fitterItem.localScale = targetValue; break;
+                    case SmoothMode.Lerp: fitterItem.localScale = Lerp(fitterItem.localScale, targetValue); break;
+                }
             }
+        }
+
+        protected Vector3 Lerp(Vector3 currentValue, Vector3 targetValue)
+        {
+            return Vector3.Lerp(currentValue, targetValue, Time.deltaTime * m_DecelerationRate);
         }
 
         private Vector2 CalculateOffsetPosition(Vector2 anchoredPosition, Vector2 viewSize, IEffectable effectable)

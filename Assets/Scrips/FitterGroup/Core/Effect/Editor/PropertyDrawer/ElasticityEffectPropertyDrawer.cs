@@ -11,7 +11,9 @@ public class ElasticityEffectPropertyDrawer : FitterEffectPropertyDrawerBase
     {
         var decelerationRate = property.FindPropertyRelative("m_DecelerationRate");
         var currentIndex = property.FindPropertyRelative("m_CurrentIndex");
+        var smoothMode = property.FindPropertyRelative("m_SmoothMode");
 
+        EditorGUILayout.PropertyField(smoothMode);
         EditorGUILayout.PropertyField(decelerationRate);
         EditorGUILayout.HelpBox("CurrentIndex: " + currentIndex.intValue, MessageType.None);
     }

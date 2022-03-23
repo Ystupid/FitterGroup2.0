@@ -10,8 +10,10 @@ namespace UnityEngine.UI.FitterGroup.Effect
     public class ElasticityEffect : FitterEffect, ILayoutModifier
     {
         [SerializeField] private int m_CurrentIndex = -1;
+        [SerializeField] private SmoothMode m_SmoothMode = SmoothMode.Lerp;
         [SerializeField] protected float m_DecelerationRate = 16;
 
+        private Vector2 m_SmoothVelocity;
         public int CurrentIndex => m_CurrentIndex;
 
         public float DecelerationRate
@@ -86,7 +88,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
 
         public override void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable)
         {
-            var result = CalculateIndex(keyValues,effectable);
+            var result = CalculateIndex(keyValues, effectable);
 
             if (result.item == null) return;
 
@@ -99,11 +101,28 @@ namespace UnityEngine.UI.FitterGroup.Effect
             var currentItem = result.item;
 
             if (Input.GetMouseButton(0)) return;
-            var targetPoint = CalculateTargetAnchor(currentItem.RectTransform.anchoredPosition, effectable) * -1;
-            effectable.TargetRect.anchoredPosition = Vector2.Lerp(effectable.TargetRect.anchoredPosition, targetPoint, Time.deltaTime * m_DecelerationRate);
+
+            var targetValue = CalculateTargetAnchor(currentItem.RectTransform.anchoredPosition, effectable) * -1;
+
+            switch (m_SmoothMode)
+            {
+                case SmoothMode.None: effectable.TargetRect.anchoredPosition = targetValue; break;
+                case SmoothMode.Lerp: effectable.TargetRect.anchoredPosition = Lerp(effectable.TargetRect.anchoredPosition, targetValue); break;
+                case SmoothMode.Smooth: effectable.TargetRect.anchoredPosition = Smooth(effectable.TargetRect.anchoredPosition, targetValue); break;
+            }
         }
 
-        protected virtual (int index,IFitterItem item) CalculateIndex<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem
+        protected Vector2 Lerp(Vector2 currentValue, Vector2 targetValue)
+        {
+            return Vector2.Lerp(currentValue, targetValue, Time.deltaTime * m_DecelerationRate);
+        }
+
+        protected Vector2 Smooth(Vector2 currentValue, Vector2 targetValue)
+        {
+            return Vector2.SmoothDamp(currentValue, targetValue, ref m_SmoothVelocity, Time.deltaTime * m_DecelerationRate);
+        }
+
+        protected virtual (int index, IFitterItem item) CalculateIndex<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem
         {
             var minDistance = float.MaxValue;
             var currentIndex = -1;

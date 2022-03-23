@@ -327,10 +327,13 @@ MonoBehaviour:
       data:
         m_MinSize: 0.5
         m_Spacing: {x: 0, y: 0}
+        m_SmoothMode: 1
+        m_DecelerationRate: 16
     00000001:
       type: {class: ElasticityEffect, ns: UnityEngine.UI.FitterGroup.Effect, asm: Assembly-CSharp}
       data:
         m_CurrentIndex: -1
+        m_SmoothMode: 1
         m_DecelerationRate: 16
 --- !u!114 &461306238
 MonoBehaviour:
