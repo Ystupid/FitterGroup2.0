@@ -14,7 +14,8 @@ public class ElasticityEffectPropertyDrawer : FitterEffectPropertyDrawerBase
         var smoothMode = property.FindPropertyRelative("m_SmoothMode");
 
         EditorGUILayout.PropertyField(smoothMode);
-        EditorGUILayout.PropertyField(decelerationRate);
+        if ((smoothMode.enumValueIndex | (int)SmoothMode.None) != (int)SmoothMode.None)
+            EditorGUILayout.PropertyField(decelerationRate);
         EditorGUILayout.HelpBox("CurrentIndex: " + currentIndex.intValue, MessageType.None);
     }
 }
