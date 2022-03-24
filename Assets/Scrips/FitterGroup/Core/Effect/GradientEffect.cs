@@ -8,6 +8,8 @@ namespace UnityEngine.UI.FitterGroup.Effect
     {
         public override FitterEffectType EffectType => FitterEffectType.Gradient;
 
+        [SerializeField] protected Material m_GradientMat;
+
         [SerializeField] protected Gradient m_GradientColor;
         public Gradient GradientColor
         {
@@ -77,9 +79,20 @@ namespace UnityEngine.UI.FitterGroup.Effect
 
                 gradient.SetKeys(colorKeys, alphaKeys);
                 graphicGradient.Apply();
-
             }
+        }
 
+        private void ApplyMaterial()
+        {
+            //var material = Object.Instantiate(m_GradientMat);
+
+            //var startColor = m_GradientColor.Evaluate(startRatio);
+            //var endColor = m_GradientColor.Evaluate(endRatio);
+
+            //material.SetColor("_StartColor", startColor);
+            //material.SetColor("_EndColor", endColor);
+
+            //fitterItem.GetComponent<Image>().material = material;
         }
 
         private Vector2 CalculateOffsetPosition(Vector2 anchoredPosition, Vector2 viewSize, IEffectable effectable)

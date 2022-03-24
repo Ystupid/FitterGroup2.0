@@ -87,7 +87,6 @@ public class FitterViewEditor : Editor
             };
             m_EffectPropertyMap.Add((int)item.EffectType, effectProperty);
         }
-
     }
 
     public override void OnInspectorGUI()
@@ -111,7 +110,10 @@ public class FitterViewEditor : Editor
         var flag = m_Effects.intValue;
 
         if (m_LastFlag != flag)
+        {
             m_EffectList.Clear();
+            m_EffectArray.ClearArray();
+        }
 
         m_LastFlag = flag;
 

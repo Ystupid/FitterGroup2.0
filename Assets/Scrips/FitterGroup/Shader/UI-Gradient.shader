@@ -6,7 +6,10 @@ Shader "UI/Gradient"
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
-        //_Gradient ("Gradient",Gradient)
+
+        _RateValue ("RateValue",Float) = 0.5
+        _StartColor ("StartColor", Color) = (1,1,1,1)
+        _EndColor ("EndColor", Color) = (1,1,1,1)
 
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -78,7 +81,10 @@ Shader "UI/Gradient"
             };
 
             sampler2D _MainTex;
+            fixed _RateValue;
             fixed4 _Color;
+            fixed4 _StartColor;
+            fixed4 _EndColor;
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
             float4 _MainTex_ST;
@@ -99,7 +105,7 @@ Shader "UI/Gradient"
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
+                half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * lerp(_StartColor,_EndColor,IN.texcoord.x + _RateValue);
 
                 #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
