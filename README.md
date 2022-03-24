@@ -10,5 +10,7 @@ UGUI循环列表2.0测试版 目前还没有解决缓存机制 请不要在正�
 ![Res_4](Res/Res_4.gif)
 # 浮动
 ![Res_5](Res/Res_5.gif)
+# 渐变
+![Res_6](Res/Res_6.gif)
 # 基于泛型
 ![Code](Res/Code.png)

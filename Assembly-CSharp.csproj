@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\FitterEffectType.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\FloatEffect.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\GradientEffect.cs" />
+    <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\GraphicGradient.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\IEffectable.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\ScaleEffect.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Effect\SmoothMode.cs" />

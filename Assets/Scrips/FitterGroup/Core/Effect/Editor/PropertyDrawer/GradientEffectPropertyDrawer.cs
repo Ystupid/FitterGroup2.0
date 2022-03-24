@@ -10,7 +10,7 @@ public class GradientEffectPropertyDrawer : FitterEffectPropertyDrawerBase
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         var gradientColor = property.FindPropertyRelative("m_GradientColor");
-        EditorGUILayout.HelpBox("由于技术太菜实现不了",MessageType.Info);
+        EditorGUILayout.HelpBox("性能比较低 后续优化",MessageType.None);
         EditorGUILayout.PropertyField(gradientColor);
     }
 }

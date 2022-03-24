@@ -34,7 +34,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
             set => m_RestoreRate = value;
         }
 
-        [SerializeField] protected bool m_ChangeReset;
+        [SerializeField] protected bool m_ChangeReset = true;
         public bool ChangeReset
         {
             get => m_ChangeReset;
