@@ -310,12 +310,12 @@ MonoBehaviour:
     Right: 0
     Top: 0
     Bottom: 0
-  m_CellSize: {x: 400, y: 400}
+  m_CellSize: {x: 200, y: 200}
   m_Spacing: {x: 50, y: 50}
   m_LayoutAxis: 0
   m_ConstraintCount: 1
   m_EffectGroup:
-    m_Effects: 0
+    m_Effects: -1
     m_EffectList:
     - id: 0
     - id: 1

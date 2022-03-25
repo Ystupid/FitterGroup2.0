@@ -11,7 +11,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
     {
         [SerializeField] private int m_CurrentIndex = -1;
         [SerializeField] private SmoothMode m_SmoothMode = SmoothMode.Lerp;
-        [SerializeField] protected float m_DecelerationRate = 16;
+        [SerializeField] private float m_DecelerationRate = 16;
 
         private Vector2 m_SmoothVelocity;
         public int CurrentIndex => m_CurrentIndex;
