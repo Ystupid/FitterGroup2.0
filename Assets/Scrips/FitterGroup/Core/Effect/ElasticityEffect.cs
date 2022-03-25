@@ -28,6 +28,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
 
         public override void Init(IEffectable effectable)
         {
+            base.Init(effectable);
             effectable.ScrollRect.inertia = false;
             m_CurrentIndex = -1;
         }

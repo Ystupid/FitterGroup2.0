@@ -112,7 +112,7 @@ public class FitterViewEditor : Editor
         if (m_LastFlag != flag)
         {
             m_EffectList.Clear();
-            //m_EffectArray.ClearArray();
+            m_EffectArray.ClearArray();
         }
 
         m_LastFlag = flag;

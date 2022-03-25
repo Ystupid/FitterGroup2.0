@@ -15,7 +15,6 @@ namespace UnityEngine.UI.FitterGroup.Effect
 
         public virtual void Init(IEffectable effectable)
         {
-            
         }
 
         public virtual void Active(IEffectable effectable) => m_IsActive = true;

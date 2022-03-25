@@ -82,13 +82,7 @@ namespace UnityEngine.UI.FitterGroup.Layout
         public virtual void Refresh()
         {
             Clear();
-
-            ResetVisualScope();
-            m_LastMaxIndex = m_CurrentMinIndex;
-            m_LastMinIndex = m_CurrentMaxIndex;
-
             ResetContentRect();
-
             Tick();
         }
 
