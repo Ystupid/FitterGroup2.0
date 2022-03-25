@@ -233,10 +233,11 @@ namespace UnityEngine.UI.FitterGroup.Layout
         /// <param name="action"></param>
         protected virtual void ForeachModifier(UnityAction<ILayoutModifier> action)
         {
-            if (action == null || ModifierList == null) return;
+            var modifierList = ModifierList;
+            if (action == null || modifierList == null) return;
 
-            for (int i = 0; i < ModifierList.Count; i++)
-                action(ModifierList[i]);
+            for (int i = 0; i < modifierList.Count; i++)
+                action(modifierList[i]);
         }
 
         public IEnumerator<KeyValuePair<int, T>> GetEnumerator() => m_ItemMap.GetEnumerator();
