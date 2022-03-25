@@ -19,7 +19,7 @@ public class Main : MonoBehaviour, IFitterable<ColorItem>
     private void Start()
     {
         m_DataList = new List<int>();
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 50; i++)
             m_DataList.Add(i);
 
         m_CacheQueue = new Queue<ColorItem>();

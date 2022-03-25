@@ -70,6 +70,12 @@ namespace UnityEngine.UI.FitterGroup.Layout
 
         public virtual void Clear()
         {
+            m_LastMinIndex = 0;
+            m_LastMaxIndex = 0;
+
+            m_CurrentMinIndex = 0;
+            m_CurrentMaxIndex = 0;
+
             foreach (var item in m_ItemMap.Keys)
                 m_ClearQueue.Enqueue(item);
 
