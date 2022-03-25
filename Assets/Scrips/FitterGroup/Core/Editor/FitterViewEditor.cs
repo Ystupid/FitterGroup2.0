@@ -50,6 +50,7 @@ public class FitterViewEditor : Editor
 
     private void OnEnable()
     {
+        Debug.Log("OnEnable");
         m_FitterView = target as FitterView;
 
         m_Padding = serializedObject.FindProperty("m_Padding");
@@ -73,6 +74,8 @@ public class FitterViewEditor : Editor
         var typeArray = Enum.GetValues(typeof(FitterEffectType));
         m_TypeArray = new FitterEffectType[typeArray.Length];
         typeArray.CopyTo(m_TypeArray, 0);
+
+        m_LastFlag = m_Effects.intValue;
 
         m_EffectList = m_FitterView.EffectGroup.EffectList;
 
