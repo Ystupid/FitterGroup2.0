@@ -50,7 +50,6 @@ public class FitterViewEditor : Editor
 
     private void OnEnable()
     {
-        Debug.Log("OnEnable");
         m_FitterView = target as FitterView;
 
         m_Padding = serializedObject.FindProperty("m_Padding");
