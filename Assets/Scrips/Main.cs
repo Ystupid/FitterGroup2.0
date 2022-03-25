@@ -55,7 +55,6 @@ public class Main : MonoBehaviour, IFitterable<ColorItem>
         else item = Instantiate(m_Prefab, m_FitterGroup.TargetRect).GetComponent<ColorItem>();
 
         item.Refresh(m_DataList[index]);
-
         return item;
     }
 }

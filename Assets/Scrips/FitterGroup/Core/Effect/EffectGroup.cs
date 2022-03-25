@@ -99,9 +99,23 @@ namespace UnityEngine.UI.FitterGroup.Effect
             }
         }
 
-        public void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem => Foreach(effect => effect.LateUpdate(keyValues, m_Effectable));
-        public void UpdateBefore<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem => Foreach(effect => effect.UpdateBefore(keyValues, m_Effectable));
-        public void UpdateAfter<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem => Foreach(effect => effect.UpdateAfter(keyValues, m_Effectable));
+        public void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem
+        {
+            for (int i = 0; i < m_EffectList.Count; i++)
+                m_EffectList[i].LateUpdate(keyValues,m_Effectable);
+        }
+
+        public void UpdateBefore<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem
+        {
+            for (int i = 0; i < m_EffectList.Count; i++)
+                m_EffectList[i].UpdateBefore(keyValues, m_Effectable);
+        }
+
+        public void UpdateAfter<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem
+        {
+            for (int i = 0; i < m_EffectList.Count; i++)
+                m_EffectList[i].UpdateAfter(keyValues, m_Effectable);
+        }
 
         public void Foreach(Action<FitterEffect> action)
         {

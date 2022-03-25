@@ -88,7 +88,9 @@ namespace UnityEngine.UI.FitterGroup.Layout
         public virtual void Refresh()
         {
             Clear();
+
             ResetContentRect();
+
             Tick();
         }
 
@@ -100,8 +102,12 @@ namespace UnityEngine.UI.FitterGroup.Layout
             var minIndex = CalculateMinIndex();
             var maxIndex = CalculateMaxIndex();
 
-            ForeachModifier(modifier => modifier.ModifyMinIndex(ref minIndex, m_LayoutProperty, ItemCount));
-            ForeachModifier(modifier => modifier.ModifyMaxIndex(ref maxIndex, m_LayoutProperty, ItemCount));
+            var modifierList = ModifierList;
+            for (int i = 0; i < modifierList.Count; i++)
+            {
+                modifierList[i].ModifyMinIndex(ref minIndex, m_LayoutProperty, ItemCount);
+                modifierList[i].ModifyMaxIndex(ref maxIndex, m_LayoutProperty, ItemCount);
+            }
 
             m_CurrentMinIndex = minIndex;
             m_CurrentMaxIndex = maxIndex;
@@ -149,7 +155,9 @@ namespace UnityEngine.UI.FitterGroup.Layout
         {
             var position = CalculatePosition(item.RectTransform, index);
 
-            ForeachModifier(modifier => modifier.ModifyItemPosition(ref position, m_LayoutProperty, ItemCount));
+            var modifierList = ModifierList;
+            for (int i = 0; i < modifierList.Count; i++)
+                modifierList[i].ModifyItemPosition(ref position, m_LayoutProperty, ItemCount);
 
             item.RectTransform.anchoredPosition = position;
 
@@ -184,7 +192,9 @@ namespace UnityEngine.UI.FitterGroup.Layout
         {
             var size = CalculateContentSize();
 
-            ForeachModifier(modifier => modifier.ModifyContentRect(ref size,m_LayoutProperty,ItemCount));
+            var modifierList = ModifierList;
+            for (int i = 0; i < modifierList.Count; i++)
+                modifierList[i].ModifyContentRect(ref size, m_LayoutProperty, ItemCount);
 
             TargetRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
             TargetRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
@@ -213,6 +223,7 @@ namespace UnityEngine.UI.FitterGroup.Layout
             if (HasItem(index)) return;
             var item = m_LayoutListener.EnableItem(index);
             if (item == null) return;
+
             m_ItemMap.Add(index, ResetPosition(ResetAnchor(item), index));
         }
 
@@ -225,19 +236,6 @@ namespace UnityEngine.UI.FitterGroup.Layout
             if (!HasItem(index)) return;
             m_LayoutListener.DisableItem(index, m_ItemMap[index]);
             m_ItemMap.Remove(index);
-        }
-
-        /// <summary>
-        /// 遍历修改器
-        /// </summary>
-        /// <param name="action"></param>
-        protected virtual void ForeachModifier(UnityAction<ILayoutModifier> action)
-        {
-            var modifierList = ModifierList;
-            if (action == null || modifierList == null) return;
-
-            for (int i = 0; i < modifierList.Count; i++)
-                action(modifierList[i]);
         }
 
         public IEnumerator<KeyValuePair<int, T>> GetEnumerator() => m_ItemMap.GetEnumerator();

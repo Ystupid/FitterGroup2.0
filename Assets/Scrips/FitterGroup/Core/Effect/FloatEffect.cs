@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI.FitterGroup.Layout;
@@ -105,7 +106,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
             return Vector2.SmoothDamp(currentValue, targetValue, ref m_SmoothVelocity, Time.deltaTime * m_DecelerationRate);
         }
 
-        protected virtual (int index, IFitterItem item) CalculateIndex<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem
+        protected virtual (int index,IFitterItem item) CalculateIndex<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem
         {
             var minDistance = float.MaxValue;
             var currentIndex = -1;
