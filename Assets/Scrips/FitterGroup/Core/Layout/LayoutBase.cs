@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UnityEngine.UI.FitterGroup.Layout
 {
-    public abstract class LayoutBase<T> : IEnumerable<KeyValuePair<int, T>> where T : IFitterItem
+    public abstract class LayoutBase<T> : IOptimizeEnumerator<T> where T : IFitterItem
     {
         protected ILayoutProperty m_LayoutProperty;
         protected ILayoutListener<T> m_LayoutListener;
@@ -238,7 +238,6 @@ namespace UnityEngine.UI.FitterGroup.Layout
             m_ItemMap.Remove(index);
         }
 
-        public IEnumerator<KeyValuePair<int, T>> GetEnumerator() => m_ItemMap.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => m_ItemMap.GetEnumerator();
+        public Dictionary<int, T>.Enumerator GetEnumerator() => m_ItemMap.GetEnumerator();
     }
 }

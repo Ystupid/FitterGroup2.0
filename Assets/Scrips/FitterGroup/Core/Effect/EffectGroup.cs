@@ -99,19 +99,19 @@ namespace UnityEngine.UI.FitterGroup.Effect
             }
         }
 
-        public void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem
+        public void LateUpdate<T>(IOptimizeEnumerator<T> keyValues) where T : IFitterItem
         {
             for (int i = 0; i < m_EffectList.Count; i++)
                 m_EffectList[i].LateUpdate(keyValues,m_Effectable);
         }
 
-        public void UpdateBefore<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem
+        public void UpdateBefore<T>(IOptimizeEnumerator<T> keyValues) where T : IFitterItem
         {
             for (int i = 0; i < m_EffectList.Count; i++)
                 m_EffectList[i].UpdateBefore(keyValues, m_Effectable);
         }
 
-        public void UpdateAfter<T>(IEnumerable<KeyValuePair<int, T>> keyValues) where T : IFitterItem
+        public void UpdateAfter<T>(IOptimizeEnumerator<T> keyValues) where T : IFitterItem
         {
             for (int i = 0; i < m_EffectList.Count; i++)
                 m_EffectList[i].UpdateAfter(keyValues, m_Effectable);

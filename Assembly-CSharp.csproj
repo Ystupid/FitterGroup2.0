@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scrips\FitterGroup\Core\Layout\ILayoutListener.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Layout\ILayoutModifier.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Layout\ILayoutProperty.cs" />
+    <Compile Include="Assets\Scrips\FitterGroup\Core\Layout\IOptimizeEnumerator.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Layout\LayoutBase.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Layout\LayoutHelper.cs" />
     <Compile Include="Assets\Scrips\FitterGroup\Core\Layout\Padding.cs" />

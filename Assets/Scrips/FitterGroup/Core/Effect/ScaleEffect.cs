@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI.FitterGroup.Layout;
 
 namespace UnityEngine.UI.FitterGroup.Effect
 {
@@ -25,7 +26,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
             set => m_Spacing = value;
         }
 
-        public override void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable)
+        public override void LateUpdate<T>(IOptimizeEnumerator<T> keyValues, IEffectable effectable)
         {
             var fitterItem = default(RectTransform);
 

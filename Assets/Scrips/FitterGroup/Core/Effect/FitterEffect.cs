@@ -19,8 +19,8 @@ namespace UnityEngine.UI.FitterGroup.Effect
 
         public virtual void Active(IEffectable effectable) => m_IsActive = true;
         public virtual void Disable(IEffectable effectable) => m_IsActive = false;
-        public virtual void UpdateBefore<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem { }
-        public virtual void UpdateAfter<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem { }
-        public virtual void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem { }
+        public virtual void UpdateBefore<T>(IOptimizeEnumerator<T> keyValues, IEffectable effectable) where T : IFitterItem { }
+        public virtual void UpdateAfter<T>(IOptimizeEnumerator<T> keyValues, IEffectable effectable) where T : IFitterItem { }
+        public virtual void LateUpdate<T>(IOptimizeEnumerator<T> keyValues, IEffectable effectable) where T : IFitterItem { }
     }
 }

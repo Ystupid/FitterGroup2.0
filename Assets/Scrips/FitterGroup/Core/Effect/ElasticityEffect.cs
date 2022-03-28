@@ -87,7 +87,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
             index = Mathf.Clamp(index, 0, itemCount - 1);
         }
 
-        public override void LateUpdate<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable)
+        public override void LateUpdate<T>(IOptimizeEnumerator<T> keyValues, IEffectable effectable)
         {
             var result = CalculateIndex(keyValues, effectable);
 
@@ -123,7 +123,7 @@ namespace UnityEngine.UI.FitterGroup.Effect
             return Vector2.SmoothDamp(currentValue, targetValue, ref m_SmoothVelocity, Time.deltaTime * m_DecelerationRate);
         }
 
-        protected virtual (int index, IFitterItem item) CalculateIndex<T>(IEnumerable<KeyValuePair<int, T>> keyValues, IEffectable effectable) where T : IFitterItem
+        protected virtual (int index, IFitterItem item) CalculateIndex<T>(IOptimizeEnumerator<T> keyValues, IEffectable effectable) where T : IFitterItem
         {
             var minDistance = float.MaxValue;
             var currentIndex = -1;
