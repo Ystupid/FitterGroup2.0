@@ -102,7 +102,9 @@ namespace UnityEngine.UI.FitterGroup.Layout
             var minIndex = CalculateMinIndex();
             var maxIndex = CalculateMaxIndex();
 
+            Profiling.Profiler.BeginSample("GCM");
             var modifierList = ModifierList;
+            Profiling.Profiler.EndSample();
             for (int i = 0; i < modifierList.Count; i++)
             {
                 modifierList[i].ModifyMinIndex(ref minIndex, m_LayoutProperty, ItemCount);

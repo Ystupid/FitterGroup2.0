@@ -85,15 +85,18 @@ namespace UnityEngine.UI.FitterGroup.Effect
         {
             get
             {
-                if (m_ModifierList == null) m_ModifierList = new List<ILayoutModifier>();
+                if (m_ModifierList == null)
+                    m_ModifierList = new List<ILayoutModifier>();
 
                 m_ModifierList.Clear();
 
-                Foreach(effect =>
+                var effect = default(FitterEffect);
+                for (int i = 0; i < m_EffectList.Count; i++)
                 {
+                    effect = m_EffectList[i];
                     if (effect is ILayoutModifier)
                         m_ModifierList.Add(effect as ILayoutModifier);
-                });
+                }
 
                 return m_ModifierList;
             }
